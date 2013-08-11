@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>Journey - 世界を股にかける。</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="../stylesheets/main.css" media="all">
+</head>
+<body>
+        <div id="wrapper">
+        
+        <header>
+        <div id="toolbox">
+            <a id="fitbitLogout" href="/logout">ログアウト</a><br>
+        </div>
+
+        <h1 id="logo"><a href="/"><span>Journey - 世界を股にかける。</span></a></h1><br>
+        
+        <h1><span id="jp_name"><%= country.jp_name %></span> (<span id="iso_name"><%= country.iso_name %>)</span></h1>
+
+        </header>
+
+        <article class="note">
+            <h2><a href="http://www.flickr.com/">flickrで写真を探す</a></h2>
+            <div id="photos"></div>
+        </article>
+
+        <article class="note">
+            <h2><a href="http://ja.wikipedia.org/wiki/<%= country.jp_name %>">Wikipediaで調べる</a></h2>
+            <div id="photos"></div>
+        </article>
+
+        
+        </div>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script src="../javascripts/country.js"></script> 
+
+</body>
+</html>

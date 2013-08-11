@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>Journey - 世界を股にかける。</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="stylesheets/main.css" media="all">
+</head>
+<body>
+    <% if (!user) { %>
+        <div id="wrapper">
+        
+        <header>        
+        <h1 id="logo"><a href="/"><span>Journey - 世界を股にかける。</span></a></h1><br>
+        </header>
+        
+        <article class="note">
+
+        <h2>いつか行きたいあの国まで歩こう</h2>
+        Journeyは今日歩いた歩数に応じて、世界の国々の情報を知ることができるサービスです。
+        例えば、今日17950歩歩いたとしたら、17950km離れたサウスジョージア・サウスサンドウィッチ諸島の情報を知ることができます。
+        歩数は<a href="http://www.fitbit.com/">fitbit</a>を使って1歩あるくごとにカウントされます。
+
+        <h2>その日のことはその日のうちに</h2>
+        一日の歩数はその日のうちにしか使えません。
+        また、一日に調べることができる国はただ1つだけです。
+        でも、これは問題ではありません。
+        なぜなら、あなたが毎日健康に行きている限り、歩数は貯まり続けるからです。
+
+
+        </article>
+
+
+        <a id="fitbitLogin" href="./auth/fitbit">Fitbitアカウントでログイン</a>
+
+        <footer><a href="http://www.yzgw.info/">管理者に連絡</a></footer>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script src="javascripts/main.js"></script>        
+
+        </div>
+    
+    <% } else { %>
+        <div id="wrapper">
+        
+        <header>
+        <div id="toolbox">
+            <a id="fitbitLogout" href="/logout">ログアウト</a><br>
+        </div>
+
+        <h1 id="logo"><a href="/"><span>Journey - 世界を股にかける。</span></a></h1><br>
+        
+        <h1><span><span id="greeting">こんにちは</span>、<%= user.displayName %></span></h1>
+        </header>
+        
+        <article class="indicator">
+        <h2>現在の歩数：<span id="miles"><%= steps %></span></h2>
+        </article>
+
+        <article class="note">
+        <h2>訪問済みの国</h2>
+        <ul>
+            <% if(countries.visited.length == 0) { %>
+                <li>まだありません。</li>
+            <% } %>
+            <% for(var i = 0; i < countries.visited.length; i++ ) { %>
+                <li><a href="/country/<%= countries.visited[i].jp_name %>"><%= countries.visited[i].jp_name %> | 
+                <span class="mileToCountry">日本から<%= countries.visited[i].distance %>歩</span></a></li>
+            <% } %>
+        </ul>
+        </article>
+
+        <article class="note">
+        <h2>今日の行き先</h2>
+        <p>歩数を使って国を探しましょう。一日に行ける国は1つだけです。</p>
+        
+        <ul>
+            <% if(countries.unvisited.length == 0) { %>
+                <li>歩数が足りないようです。</li>
+            <% } %>
+            <% for(var i = 0; i < countries.unvisited.length; i++ ) { %>
+                <li><a href="/country/<%= countries.unvisited[i].jp_name %>"><%= countries.unvisited[i].jp_name %> | 
+                <span class="mileToCountry">日本から<%= countries.unvisited[i].distance %>歩</span></a></li>
+            <% } %>
+        </ul>
+
+         <ul class="invisible">
+            <% for(var i = 0; i < countries.invisible.length; i++ ) { %>
+                <li><%= countries.invisible[i].jp_name %> | 
+                <span class="mileToCountry">日本から<%= countries.invisible[i].distance %>歩</span></li>
+            <% } %>
+        </ul>
+            
+        </article>
+
+        </div>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        <script src="javascripts/top.js"></script>        
+
+    <% } %>
+    
+</body>
+</html>
